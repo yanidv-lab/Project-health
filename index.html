@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>תרכובות צמחיות פונקציונליות | בריאות הגוף והנפש</title>
+  <meta name="description" content="אוסף מבוסס מחקר של כ-30 תרכובות צמחיות (משקאות, מרקים, חטיפים) התומכות בתפקודי גוף ונפש שונים. כל תרכובת מגובה במקורות מדעיים.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&family=Noto+Sans+Hebrew:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+</head>
+<body>
+
+  <!-- ===== NAVIGATION BAR ===== -->
+  <header class="navbar" id="navbar">
+    <div class="navbar__container">
+      <a href="#" class="navbar__brand" id="nav-brand">
+        <span class="navbar__icon">🌿</span>
+        <span class="navbar__title">תרכובות צמחיות</span>
+      </a>
+      <nav class="navbar__links" id="nav-links">
+        <a href="#carousel-section" class="navbar__link" id="nav-all" data-section="all">כל התרכובות</a>
+        <a href="#filter-section" class="navbar__link" id="nav-goals" data-section="goals">לפי מטרה</a>
+        <a href="#about-section" class="navbar__link" id="nav-about" data-section="about">אודות המקורות</a>
+      </nav>
+      <button class="navbar__hamburger" id="hamburger-btn" aria-label="תפריט ניווט" aria-expanded="false">
+        <span class="navbar__hamburger-line"></span>
+        <span class="navbar__hamburger-line"></span>
+        <span class="navbar__hamburger-line"></span>
+      </button>
+    </div>
+    <!-- Mobile slide-in menu -->
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+      <div class="mobile-menu__overlay" id="mobile-menu-overlay"></div>
+      <div class="mobile-menu__panel">
+        <button class="mobile-menu__close" id="mobile-menu-close" aria-label="סגור תפריט">✕</button>
+        <nav class="mobile-menu__links">
+          <a href="#carousel-section" class="mobile-menu__link" data-section="all">כל התרכובות</a>
+          <a href="#filter-section" class="mobile-menu__link" data-section="goals">לפי מטרה</a>
+          <a href="#about-section" class="mobile-menu__link" data-section="about">אודות המקורות</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== HERO SECTION ===== -->
+  <section class="hero" id="hero-section">
+    <div class="hero__bg-shapes">
+      <div class="hero__shape hero__shape--1"></div>
+      <div class="hero__shape hero__shape--2"></div>
+      <div class="hero__shape hero__shape--3"></div>
+    </div>
+    <div class="hero__content">
+      <h1 class="hero__title">תרכובות צמחיות פונקציונליות<br><span class="hero__title-accent">לבריאות הגוף והנפש</span></h1>
+      <p class="hero__subtitle">
+        אוסף קפדני של כ-30 תרכובות צמחיות – משקאות, מרקים, חטיפים ועוד – 
+        המבוססות על עדויות מחקריות (ניסויים קליניים, מטא-אנליזות ומחקרים תצפיתיים). 
+        כל תרכובת מקושרת למקורות המדעיים שלה.
+      </p>
+      <a href="#carousel-section" class="hero__cta" id="hero-cta-btn">
+        <span>צפה בתרכובות</span>
+        <svg class="hero__cta-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      </a>
+      <div class="hero__stats" id="hero-stats">
+        <div class="hero__stat">
+          <span class="hero__stat-number" id="stat-recipes">30</span>
+          <span class="hero__stat-label">תרכובות</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-number" id="stat-targets">15+</span>
+          <span class="hero__stat-label">יעדים בריאותיים</span>
+        </div>
+        <div class="hero__stat">
+          <span class="hero__stat-number" id="stat-refs">80+</span>
+          <span class="hero__stat-label">מקורות מדעיים</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FILTER SECTION ===== -->
+  <section class="filter-section" id="filter-section">
+    <div class="filter-section__container">
+      <h2 class="filter-section__title">סינון לפי מטרה בריאותית</h2>
+      <div class="filter-bar" id="filter-bar" role="tablist">
+        <button class="filter-chip filter-chip--active" data-target="all" role="tab" aria-selected="true" id="filter-all">
+          <span class="filter-chip__icon">🔄</span>
+          <span>הכל</span>
+        </button>
+        <!-- Dynamically populated filter chips -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CAROUSEL SECTION ===== -->
+  <section class="carousel-section" id="carousel-section">
+    <div class="carousel-section__container">
+      <h2 class="carousel-section__title" id="carousel-title">כל התרכובות</h2>
+      <p class="carousel-section__count" id="carousel-count"></p>
+      
+      <div class="carousel" id="carousel">
+        <button class="carousel__arrow carousel__arrow--right" id="carousel-prev" aria-label="תרכובת קודמת">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+        
+        <div class="carousel__track-container">
+          <div class="carousel__track" id="carousel-track">
+            <!-- Cards are dynamically generated -->
+          </div>
+        </div>
+        
+        <button class="carousel__arrow carousel__arrow--left" id="carousel-next" aria-label="תרכובת הבאה">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+      </div>
+
+      <div class="carousel__dots" id="carousel-dots"></div>
+    </div>
+  </section>
+
+  <!-- ===== GRID VIEW (alternative browse) ===== -->
+  <section class="grid-section" id="grid-section">
+    <div class="grid-section__container">
+      <div class="grid-section__header">
+        <h2 class="grid-section__title">כל התרכובות</h2>
+        <div class="grid-section__view-toggle">
+          <button class="view-toggle-btn view-toggle-btn--active" id="view-carousel-btn" aria-label="תצוגת קרוסלה">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg>
+          </button>
+          <button class="view-toggle-btn" id="view-grid-btn" aria-label="תצוגת רשת">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="recipe-grid" id="recipe-grid">
+        <!-- Grid cards dynamically generated -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT SECTION ===== -->
+  <section class="about-section" id="about-section">
+    <div class="about-section__container">
+      <h2 class="about-section__title">אודות המקורות המדעיים</h2>
+      <div class="about-section__content">
+        <div class="about-card">
+          <div class="about-card__icon">🔬</div>
+          <h3>מחקר מבוסס ראיות</h3>
+          <p>כל תרכובת באתר מגובה במחקרים מדעיים שפורסמו בכתבי עת בינלאומיים עם ביקורת עמיתים, כולל ניסויים קליניים אקראיים מבוקרים (RCTs) ומטא-אנליזות.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-card__icon">📋</div>
+          <h3>מקורות מאומתים</h3>
+          <p>המקורות כוללים מאגרי PubMed, כתבי עת כגון Frontiers, Nature ו-Wiley, וסקירות שיטתיות. כל מקור ניתן ללחיצה ולגישה ישירה.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-card__icon">⚠️</div>
+          <h3>הבהרה חשובה</h3>
+          <p>המידע באתר זה אינו מהווה ייעוץ רפואי אישי. יש להתייעץ עם רופא לפני שינוי בתזונה או בשימוש בתוספים, במיוחד במחלות כרוניות או בשימוש בתרופות.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== RECIPE DETAIL MODAL ===== -->
+  <div class="modal-overlay" id="recipe-modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal" id="modal-content">
+      <button class="modal__close" id="modal-close" aria-label="סגור">✕</button>
+      
+      <div class="modal__image-container">
+        <img class="modal__image" id="modal-image" src="" alt="" loading="lazy">
+        <div class="modal__type-badge" id="modal-type"></div>
+      </div>
+
+      <div class="modal__body">
+        <h2 class="modal__title" id="modal-title"></h2>
+        <p class="modal__subtitle" id="modal-subtitle"></p>
+
+        <div class="modal__targets" id="modal-targets"></div>
+
+        <div class="modal__section">
+          <h3 class="modal__section-title">
+            <span class="modal__section-icon">🥗</span>
+            מרכיבים
+          </h3>
+          <ul class="modal__ingredients" id="modal-ingredients"></ul>
+        </div>
+
+        <div class="modal__section">
+          <h3 class="modal__section-title">
+            <span class="modal__section-icon">👨‍🍳</span>
+            אופן ההכנה
+          </h3>
+          <div class="modal__preparation" id="modal-preparation"></div>
+        </div>
+
+        <div class="modal__section">
+          <h3 class="modal__section-title">
+            <span class="modal__section-icon">📅</span>
+            תדירות ומשך שימוש מומלץ
+          </h3>
+          <p class="modal__frequency" id="modal-frequency"></p>
+        </div>
+
+        <div class="modal__section modal__section--evidence">
+          <h3 class="modal__section-title">
+            <span class="modal__section-icon">🔬</span>
+            עדויות מדעיות
+          </h3>
+          <p class="modal__evidence" id="modal-evidence"></p>
+        </div>
+
+        <div class="modal__section">
+          <h3 class="modal__section-title">
+            <span class="modal__section-icon">🌱</span>
+            מרכיבים עיקריים מגובי מחקר
+          </h3>
+          <div class="modal__key-ingredients" id="modal-key-ingredients"></div>
+        </div>
+
+        <div class="modal__section">
+          <h3 class="modal__section-title">
+            <span class="modal__section-icon">📚</span>
+            מקורות מדעיים
+          </h3>
+          <ul class="modal__refs" id="modal-refs"></ul>
+        </div>
+
+        <div class="modal__disclaimer">
+          <p>⚠️ <strong>הבהרה:</strong> המידע באתר זה אינו מהווה ייעוץ רפואי אישי. יש להתייעץ עם רופא לפני שינוי בתזונה או בשימוש בתוספים, במיוחד במחלות כרוניות או בשימוש בתרופות.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" id="footer">
+    <div class="footer__container">
+      <div class="footer__brand">
+        <span class="footer__icon">🌿</span>
+        <span>תרכובות צמחיות פונקציונליות</span>
+      </div>
+      <p class="footer__disclaimer">
+        המידע באתר זה מבוסס על סקירת ספרות מדעית ואינו מהווה ייעוץ רפואי. 
+        יש להתייעץ עם איש מקצוע בריאות לפני שינויים תזונתיים.
+      </p>
+      <p class="footer__copyright">© 2026 כל הזכויות שמורות</p>
+    </div>
+  </footer>
+
+  <script src="scripts/app.js"></script>
+</body>
+</html>
