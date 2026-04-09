@@ -691,8 +691,10 @@ button {
    =========================== */
 .recipe-card {
   min-width: 100%;
+  width: 100%;
+  max-width: 100%;
+  flex: 0 0 100%;
   padding: var(--sp-md);
-  flex-shrink: 0;
   scroll-snap-align: center;
 }
 
@@ -760,6 +762,7 @@ button {
 
 .recipe-card__content {
   padding: var(--sp-lg);
+  min-width: 0;
 }
 
 .recipe-card__title {
@@ -1410,6 +1413,7 @@ button {
 
   .recipe-card__content {
     flex: 1;
+    min-width: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
