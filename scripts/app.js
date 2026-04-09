@@ -23,10 +23,12 @@ const TARGET_MAP = {
   blood_pressure_support:     { he: 'תמיכה בלחץ דם',      icon: '❤️', cls: 'bp' },
   vascular_health:            { he: 'בריאות כלי הדם',      icon: '🫀', cls: 'vascular' },
   vascular_function:          { he: 'תפקוד כלי דם',       icon: '🫀', cls: 'vascular' },
+  vascular_support:           { he: 'תמיכת כלי דם',       icon: '🫀', cls: 'vascular' },
   LDL_cholesterol_reduction:  { he: 'הורדת כולסטרול',      icon: '📉', cls: 'bp' },
   LDL_reduction:              { he: 'הורדת LDL',           icon: '📉', cls: 'bp' },
   lipid_profile_support:      { he: 'שומנים בדם',          icon: '📊', cls: 'bp' },
-  fasting_glucose_reduction:  { he: 'סוכר בצום',           icon: '🩸', cls: 'glucose' },
+  fasting_glucose_reduction:  { he: 'הורדת סוכר בצום',   icon: '🩸', cls: 'glucose' },
+  fasting_glucose_support:    { he: 'סוכר בצום',           icon: '🩸', cls: 'glucose' },
   postprandial_glucose_support: { he: 'סוכר אחרי ארוחה',  icon: '🩸', cls: 'glucose' },
   insulin_resistance_support: { he: 'עמידות לאינסולין',    icon: '🩸', cls: 'glucose' },
   IBS_symptoms_relief:        { he: 'הקלה ב-IBS',          icon: '🫃', cls: 'digest' },
@@ -76,6 +78,7 @@ const TYPE_MAP = {
   hot_drink:          'משקה חם',
   cold_drink:         'משקה קר',
   hot_or_cold_drink:  'משקה חם/קר',
+  cold_or_hot_drink:  'משקה קר/חם',
   cold_or_room_temp_drink: 'משקה קר/חדר',
   soup:               'מרק',
   stew:               'תבשיל',
@@ -98,26 +101,26 @@ const IMAGE_URLS = {
   R8:  'https://images.pexels.com/photos/5946623/pexels-photo-5946623.jpeg?auto=compress&cs=tinysrgb&w=600',   // cinnamon oat drink
   R9:  'https://images.pexels.com/photos/1417945/pexels-photo-1417945.jpeg?auto=compress&cs=tinysrgb&w=600',   // herbal blend tea
   R10: 'https://images.pexels.com/photos/1327215/pexels-photo-1327215.jpeg?auto=compress&cs=tinysrgb&w=600',   // tomato juice
-  R11: 'https://images.pexels.com/photos/1232152/pexels-photo-1232152.jpeg?auto=compress&cs=tinysrgb&w=600',   // lemon water
+  R11: 'https://images.pexels.com/photos/327090/pexels-photo-327090.jpeg?auto=compress&cs=tinysrgb&w=600',      // lemon water
   R12: 'https://images.pexels.com/photos/3679974/pexels-photo-3679974.jpeg?auto=compress&cs=tinysrgb&w=600',   // pomegranate juice
   R13: 'https://images.pexels.com/photos/1346347/pexels-photo-1346347.jpeg?auto=compress&cs=tinysrgb&w=600',   // blueberry smoothie
-  R14: 'https://images.pexels.com/photos/1232152/pexels-photo-1232152.jpeg?auto=compress&cs=tinysrgb&w=600',   // infused water
+  R14: 'https://images.pexels.com/photos/327090/pexels-photo-327090.jpeg?auto=compress&cs=tinysrgb&w=600',      // infused water
   R15: 'https://images.pexels.com/photos/1346347/pexels-photo-1346347.jpeg?auto=compress&cs=tinysrgb&w=600',   // green smoothie
   R16: 'https://images.pexels.com/photos/1309061/pexels-photo-1309061.jpeg?auto=compress&cs=tinysrgb&w=600',   // beetroot juice
   R17: 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=600',   // chia flax topping
   R18: 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=600',   // lentil salad
   R19: 'https://images.pexels.com/photos/539451/pexels-photo-539451.jpeg?auto=compress&cs=tinysrgb&w=600',    // vegetable soup
   R20: 'https://images.pexels.com/photos/1417945/pexels-photo-1417945.jpeg?auto=compress&cs=tinysrgb&w=600',   // green tea mint
-  R21: 'https://images.pexels.com/photos/1232152/pexels-photo-1232152.jpeg?auto=compress&cs=tinysrgb&w=600',   // water glass
+  R21: 'https://images.pexels.com/photos/327090/pexels-photo-327090.jpeg?auto=compress&cs=tinysrgb&w=600',      // water glass
   R22: 'https://images.pexels.com/photos/1638280/pexels-photo-1638280.jpeg?auto=compress&cs=tinysrgb&w=600',   // sage tea
-  R23: 'https://images.pexels.com/photos/1232152/pexels-photo-1232152.jpeg?auto=compress&cs=tinysrgb&w=600',   // ACV lemon water
+  R23: 'https://images.pexels.com/photos/327090/pexels-photo-327090.jpeg?auto=compress&cs=tinysrgb&w=600',      // ACV lemon water
   R24: 'https://images.pexels.com/photos/1346347/pexels-photo-1346347.jpeg?auto=compress&cs=tinysrgb&w=600',   // banana smoothie
   R25: 'https://images.pexels.com/photos/3026804/pexels-photo-3026804.jpeg?auto=compress&cs=tinysrgb&w=600',   // date energy balls
   R26: 'https://images.pexels.com/photos/539451/pexels-photo-539451.jpeg?auto=compress&cs=tinysrgb&w=600',    // chickpea stew
   R27: 'https://images.pexels.com/photos/5946623/pexels-photo-5946623.jpeg?auto=compress&cs=tinysrgb&w=600',   // oat porridge
   R28: 'https://images.pexels.com/photos/1638280/pexels-photo-1638280.jpeg?auto=compress&cs=tinysrgb&w=600',   // ginger lemon tea
   R29: 'https://images.pexels.com/photos/5946623/pexels-photo-5946623.jpeg?auto=compress&cs=tinysrgb&w=600',   // oat bedtime drink
-  R30: 'https://images.pexels.com/photos/1232152/pexels-photo-1232152.jpeg?auto=compress&cs=tinysrgb&w=600',   // warm lemon water
+  R30: 'https://images.pexels.com/photos/327090/pexels-photo-327090.jpeg?auto=compress&cs=tinysrgb&w=600',      // warm lemon water
 };
 
 // Emoji fallbacks per recipe type
@@ -125,6 +128,7 @@ const TYPE_EMOJI = {
   hot_drink:          '☕',
   cold_drink:         '🥤',
   hot_or_cold_drink:  '🍵',
+  cold_or_hot_drink:  '🍵',
   cold_or_room_temp_drink: '🥤',
   soup:               '🍲',
   stew:               '🍛',
