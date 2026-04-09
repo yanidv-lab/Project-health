@@ -469,35 +469,54 @@ function renderCarousel() {
     `<button class="carousel__dot${i === 0 ? ' carousel__dot--active' : ''}" data-index="${i}" aria-label="שקופית ${i + 1}"></button>`
   ).join('');
 
+  // Setup intersection observer for dots
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.dataset.id;
+        const index = filteredRecipes.findIndex(r => r.recipe_id === id);
+        if (index !== -1) {
+          currentSlide = index;
+          updateDotsAndArrows();
+        }
+      }
+    });
+  }, {
+    root: $('.carousel__track-container'),
+    threshold: 0.6
+  });
+
+  track.querySelectorAll('.recipe-card').forEach(card => observer.observe(card));
+
   currentSlide = 0;
-  updateCarouselPosition();
+  updateDotsAndArrows();
   updateCarouselCount();
 
   // Dot click handlers
   dotsContainer.querySelectorAll('.carousel__dot').forEach(dot => {
     dot.addEventListener('click', () => {
-      currentSlide = parseInt(dot.dataset.index);
-      updateCarouselPosition();
+      const index = parseInt(dot.dataset.index);
+      scrollToSlide(index);
     });
   });
 }
 
-function updateCarouselPosition() {
-  const track = $('#carousel-track');
-  // RTL: positive translateX to go "right" (which is the start in RTL)
-  const offset = currentSlide * 100;
-  track.style.transform = `translateX(${offset}%)`;
-
-  // Update dots
+function updateDotsAndArrows() {
   $$('.carousel__dot').forEach((dot, i) => {
     dot.classList.toggle('carousel__dot--active', i === currentSlide);
   });
 
-  // Update arrows
   const prev = $('#carousel-prev');
   const next = $('#carousel-next');
   if (prev) prev.disabled = currentSlide === 0;
   if (next) next.disabled = currentSlide >= filteredRecipes.length - 1;
+}
+
+function scrollToSlide(index) {
+  const cards = $$('.carousel__track .recipe-card');
+  if (cards[index]) {
+    cards[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  }
 }
 
 function updateCarouselCount() {
@@ -506,17 +525,11 @@ function updateCarouselCount() {
 }
 
 function nextSlide() {
-  if (currentSlide < filteredRecipes.length - 1) {
-    currentSlide++;
-    updateCarouselPosition();
-  }
+  if (currentSlide < filteredRecipes.length - 1) scrollToSlide(currentSlide + 1);
 }
 
 function prevSlide() {
-  if (currentSlide > 0) {
-    currentSlide--;
-    updateCarouselPosition();
-  }
+  if (currentSlide > 0) scrollToSlide(currentSlide - 1);
 }
 
 // ===== GRID =====
@@ -704,36 +717,7 @@ function initNavbar() {
   }, { passive: true });
 }
 
-// ===== TOUCH / SWIPE SUPPORT =====
-
-function initSwipe() {
-  const track = $('#carousel-track');
-
-  track.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-  }, { passive: true });
-
-  track.addEventListener('touchend', (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
-  }, { passive: true });
-}
-
-function handleSwipe() {
-  const diff = touchStartX - touchEndX;
-  const threshold = 50;
-
-  // RTL: swipe left (negative diff in LTR) means "next" in LTR but "prev" in RTL
-  if (Math.abs(diff) < threshold) return;
-
-  if (diff > 0) {
-    // Swiped left → in RTL this goes to previous (right-to-left reading)
-    prevSlide();
-  } else {
-    // Swiped right → in RTL this goes to next
-    nextSlide();
-  }
-}
+// SWIPE SUPPORT REMOVED: Managed natively by CSS scroll-snap!
 
 // ===== MODAL EVENTS =====
 
@@ -833,7 +817,6 @@ async function init() {
     initNavbar();
     initModal();
     initCarouselControls();
-    initSwipe();
     initViewToggle();
 
     console.log(`✅ Loaded ${allRecipes.length} recipes`);

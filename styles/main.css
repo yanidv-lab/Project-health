@@ -618,16 +618,21 @@ button {
 }
 
 .carousel__track-container {
-  overflow: hidden;
+  overflow-x: auto;
   flex: 1;
   border-radius: var(--radius-xl);
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+}
+
+.carousel__track-container::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
 }
 
 .carousel__track {
   display: flex;
-  transition: transform 0.45s var(--ease-out);
-  touch-action: pan-y;
-  will-change: transform;
 }
 
 .carousel__arrow {
@@ -688,6 +693,7 @@ button {
   min-width: 100%;
   padding: var(--sp-md);
   flex-shrink: 0;
+  scroll-snap-align: center;
 }
 
 .recipe-card__inner {
